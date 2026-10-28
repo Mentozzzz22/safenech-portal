@@ -1,0 +1,77 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@theme {
+  --color-bg: #07080a;
+  --color-surface: #0e1013;
+  --color-surface-2: #16191e;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.16);
+  --color-fg: #f3f4f6;
+  --color-muted: #8b919b;
+  --color-accent: #ffb224;
+  --color-accent-soft: rgb(255 178 36 / 0.12);
+  --color-ok: #3ddc97;
+  --color-bad: #ff6b6b;
+
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+html {
+  color-scheme: dark;
+  background: var(--color-bg);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #000;
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility card {
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  border-radius: 1.25rem;
+}
+
+@layer components {
+  .btn {
+    @apply focus-visible:outline-accent inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply bg-accent text-black hover:bg-[#ffc24f];
+  }
+  .btn-ghost {
+    @apply border-line-strong text-fg border hover:bg-white/5;
+  }
+  .input {
+    @apply border-line bg-surface-2 text-fg placeholder:text-muted focus:border-accent w-full rounded-xl border px-4 py-3 text-sm outline-none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
